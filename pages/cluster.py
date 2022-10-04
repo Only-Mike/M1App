@@ -16,5 +16,8 @@ st.set_page_config(page_title='Streamlit Cluster', layout = 'wide')
 st.header(' Graphs showing clusters in HR data')
 st.write('hello world')
 
-
+hr = pd.read_csv("data_dictionary.csv")
+hr1 = pd.read_csv("employee_survey_data.csv")
+hr2 = pd.read_csv("general_data.csv")
+hr3 = pd.read_csv("manager_survey_data.csv")
 
