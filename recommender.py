@@ -63,7 +63,7 @@ def similar_Department(Department, n):
   place: name of place (str)
   n: number of similar cities to print
   """
-  ix = le_Department.transform([Department])[0]
+  ix = le_Department.transform(['Department'])[0]
   sim_Department = le_Department.inverse_transform(np.argsort(cosine_distance_matrix_Department[ix,:])[:n+1])
   return sim_Department[1:]
 
