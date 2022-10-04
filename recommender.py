@@ -36,7 +36,7 @@ def read_process_data():
     le_Department = LabelEncoder()
     le_EducationField = LabelEncoder()
 
-    hr_df['Department'] = le_Department.fit_transform(hr_df['Department'])
+    hr_df['Department'] = le_Department.fit_transform(hr_df[Department])
     hr_df['EducationField'] = le_EducationField.fit_transform(hr_df['EducationField'])
 
 
