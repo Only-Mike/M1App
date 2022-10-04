@@ -53,9 +53,9 @@ def read_process_data():
     cosine_distance_matrix_matrix_Educations = cosine_distances(matrix_Educations)
   
 
-    return hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalance, matrix_Education, cosine_distance_matrix_WorkLifeBalance
+    return hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalances, matrix_Educations, cosine_distance_matrix_WorkLifeBalances
 
-hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalance, matrix_Education, cosine_distance_matrix_WorkLifeBalance = read_process_data()
+hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalances, matrix_matrix_Educations, cosine_distance_matrix_WorkLifeBalances = read_process_data()
 
 
 def similar_WorkLifeBalance(WorkLifeBalance, n):
