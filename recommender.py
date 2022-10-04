@@ -34,29 +34,29 @@ def read_process_data():
 
     # encode ids
     le_Department = LabelEncoder()
-    le_EducationField = LabelEncoder()
+    le_Education = LabelEncoder()
 
     hr_df['Department'] = le_Department.fit_transform(hr_df['Department'])
-    hr_df['EducationField'] = le_EducationField.fit_transform(hr_df['EducationField'])
+    hr_df['Education'] = le_Education.fit_transform(hr_df['Education'])
 
 
     # construct matrix
     ones = np.ones(len(hr_df), np.uint32)
-    matrix = ss.coo_matrix((ones, (hr_df['Department'], hr_df['EducationField'])))
+    matrix = ss.coo_matrix((ones, (hr_df['Department'], hr_df['Education'])))
 
     # decomposition
     svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
     matrix_Department = svd.fit_transform(matrix)
-    matrix_EducationField = svd.fit_transform(matrix)
+    matrix_Education = svd.fit_transform(matrix)
 
 
     # distance-matrix
     cosine_distance_matrix_Department = cosine_distances(matrix_Department)
   
 
-    return hr_df, le_Department, le_EducationField, matrix, svd, matrix_Department, matrix_EducationField, cosine_distance_matrix_Department
+    return hr_df, le_Department, le_Education, matrix, svd, matrix_Department, matrix_Education, cosine_distance_matrix_Department
 
-hr_df, le_Department, le_EducationField, matrix, svd, matrix_Department, matrix_EducationField, cosine_distance_matrix_Department = read_process_data()
+hr_df, le_Department, le_Education, matrix, svd, matrix_Department, matrix_Education, cosine_distance_matrix_Department = read_process_data()
 
 
 def similar_Department(Department, n):
@@ -78,21 +78,21 @@ if st.button('Recommend Something - click!'):
     st.write(similar_Department(department, n_recs_c))
 
 
-def similar_Department_EducationField(EducationField, n):
-  u_id = le_EducationField.transform([EducationField])[0]
-  EducationField_ids = hr_df[hr_df.EducationField == u_id]['Department'].unique()
-  EducationField_vector_hr_df = np.mean(matrix_Department[EducationField_ids], axis=0)
-  closest_for_user = cosine_distances(EducationField_vector_hr_df.reshape(1,5), matrix_Department)
+def similar_Department_Education(Education, n):
+  u_id = le_Education.transform([Education])[0]
+  Education_ids = hr_df[hr_df.Education == u_id]['Department'].unique()
+  Education_vector_hr_df = np.mean(matrix_Department[Education_ids], axis=0)
+  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_Department)
   sim_Department = le_Department.inverse_transform(np.argsort(closest_for_user[0])[:n])
   return sim_Department
 
-one_user = st.selectbox('Select EducationField', hr_df.EducationField.unique())
+one_user = st.selectbox('Select Education', hr_df.Education.unique())
 if one_user:
-    st.write(hr_df[hr_df.EducationField == one_user]['EducationField'].unique())
+    st.write(hr_df[hr_df.Education == one_user]['Education'].unique())
 
-n_recs_u = st.slider('How many recs? for EducationField', 1, 20, 2)
+n_recs_u = st.slider('How many recs? for Education', 1, 20, 2)
 
-if st.button('Recommend EducationField - click!'):
-    similar_cities = similar_Department_EducationField(one_user, n_recs_u)
+if st.button('Recommend Education - click!'):
+    similar_cities = similar_Department_Education(one_user, n_recs_u)
     st.write(similar_cities)
 
