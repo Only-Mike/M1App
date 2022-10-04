@@ -90,7 +90,7 @@ if st.button('Recommend Something - click!'):
 def similar_Age(Age, n):
   u_id = le_Age.transform([Age])[0]
   Age_ids = hr_df[hr_df.Age == u_id]['MonthlyIncome'].unique()
-  Age_vector_trips = np.mean(matrix_MonthlyIncome[MonthlyIncome_ids], axis=0)
+  Age_vector_hr_df = np.mean(matrix_MonthlyIncome[MonthlyIncome_ids], axis=0)
   closest_for_user = cosine_distances(Age_vector_hr_df.reshape(1,5), matrix_MonthlyIncome)
   sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(closest_for_user[0])[:n])
   return sim_MonthlyIncome
