@@ -69,6 +69,7 @@ def similar_Education(WorkLifeBalance, n):
   return sim_WorkLifeBalances[1:]
 
 st.title('Streamlit Recommender')
+st.subheader('NB: It seems like the encoder can't recognise the "Education" value for some reason')
     
 One_Education = st.selectbox('Select Education', hr_df.Education.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
