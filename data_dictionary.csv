@@ -1,0 +1,53 @@
+,Variable,Meaning,Levels
+0,Age,Age of the employee,
+1,Attrition,Whether the employee left in the previous year or not,
+2,BusinessTravel,How frequently the employees travelled for business purposes in the last year,
+3,Department,Department in company,
+4,DistanceFromHome,Distance from home in kms,
+5,Education,Education Level,1 'Below College'
+6,,,2 'College'
+7,,,3 'Bachelor'
+8,,,4 'Master'
+9,,,5 'Doctor'
+10,EducationField,Field of education,
+11,EmployeeCount,Employee count,
+12,EmployeeNumber,Employee number/id,
+13,EnvironmentSatisfaction,Work Environment Satisfaction Level,1 'Low'
+14,,,2 'Medium'
+15,,,3 'High'
+16,,,4 'Very High'
+17,Gender,Gender of employee,
+18,JobInvolvement,Job Involvement Level,1 'Low'
+19,,,2 'Medium'
+20,,,3 'High'
+21,,,4 'Very High'
+22,JobLevel,Job level at company on a scale of 1 to 5,
+23,JobRole,Name of job role in company,
+24,JobSatisfaction,Job Satisfaction Level,1 'Low'
+25,,,2 'Medium'
+26,,,3 'High'
+27,,,4 'Very High'
+28,MaritalStatus,Marital status of the employee,
+29,MonthlyIncome,Monthly income in rupees per month,
+30,NumCompaniesWorked,Total number of companies the employee has worked for,
+31,Over18,Whether the employee is above 18 years of age or not,
+32,PercentSalaryHike,Percent salary hike for last year,
+33,PerformanceRating,Performance rating for last year,1 'Low'
+34,,,2 'Good'
+35,,,3 'Excellent'
+36,,,4 'Outstanding'
+37,RelationshipSatisfaction,Relationship satisfaction level,1 'Low'
+38,,,2 'Medium'
+39,,,3 'High'
+40,,,4 'Very High'
+41,StandardHours,Standard hours of work for the employee,
+42,StockOptionLevel,Stock option level of the employee,
+43,TotalWorkingYears,Total number of years the employee has worked so far,
+44,TrainingTimesLastYear,Number of times training was conducted for this employee last year,
+45,WorkLifeBalance,Work life balance level,1 'Bad'
+46,,,2 'Good'
+47,,,3 'Better'
+48,,,4 'Best'
+49,YearsAtCompany,Total number of years spent at the company by the employee,
+50,YearsSinceLastPromotion,Number of years since last promotion,
+51,YearsWithCurrManager,Number of years under current manager,
