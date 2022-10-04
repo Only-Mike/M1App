@@ -56,21 +56,10 @@ def read_process_data():
 
 hr_df, le_MonthlyIncome, le_Age, matrix, svd, matrix_MonthlyIncome, matrix_Age, cosine_distance_matrix_MonthlyIncome = read_process_data()
 
-def similar_MonthlyIncome(MonthlyIncome, n):
-  """
-  this function performs city similarity search
-  place: name of place (str)
-  n: number of similar cities to print
-  """
-  ix = le_MonthlyIncome.transform(MonthlyIncome)[0]
-  sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(cosine_distance_matrix_MonthlyIncome[ix,:])[:n+1])
-  return sim_MonthlyIncome[1:]
-
-  st.title('Streamlit Recommender')
 
 def similar_MonthlyIncome(MonthlyIncome, n):
   """
-  this function performs city similarity search
+  this function performs MOnthly Income similarity search
   place: name of place (str)
   n: number of similar cities to print
   """
