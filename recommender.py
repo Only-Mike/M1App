@@ -10,10 +10,10 @@ st.set_page_config(page_title='Streamlit HR recommender', layout = 'wide')
 
 def read_process_data():
     # data and prepro
-    hr = pd.read_excel("data_dictionary.xlsx")
-    hr1 = pd.read_csv("employee_survey_data.csv")
-    hr2 = pd.read_csv("general_data.csv")
-    hr3 = pd.read_csv("manager_survey_data.csv")
+    hr = pd.read_excel(r"data_dictionary.xlsx")
+    hr1 = pd.read_csv(r"employee_survey_data.csv")
+    hr2 = pd.read_csv(r"general_data.csv")
+    hr3 = pd.read_csv(r"manager_survey_data.csv")
 
     # Merge datasets
     mergehr = pd.merge(hr1, hr2)
