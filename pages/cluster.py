@@ -58,5 +58,5 @@ data_reduced_pca = pca.fit_transform(hr_df_scaled)
 print(pca.explained_variance_ratio_)
 
 fig = plt.figure
-sns.scatterplot(embeddings[:,0],embeddings[:,1], hue = hr_df['Attrition'])
+sns.scatterplot(embeddings[:,0], hue = hr_df['Attrition'])
 st.pyplot(fig, clear_figure=None)
