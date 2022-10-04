@@ -84,7 +84,7 @@ monthly_income = st.selectbox('Select Monthly Income', hr_df.MonthlyIncome.uniqu
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
-    st.write(similar_MonthlyIncome(monthly_income, n_recs_c))
+    st.write(similar_MonthlyIncome(Monthly_Income, n_recs_c))
 
 
 def similar_Age(Age, n):
