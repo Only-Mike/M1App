@@ -123,4 +123,30 @@ def similar_MonthlyIncome(MonthlyIncome, n):
   sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(cosine_distance_matrix_MonthlyIncome[ix,:])[:n+1])
   return sim_MonthlyIncome[1:]
 
-  st.title('Streamlit Recommender')
+st.title('Streamlit Recommender')
+    
+monthlyincome = st.selectbox('Select Place', hr_df.MonthlyIncome.unique())
+n_recs_c = st.slider('How many recs?', 1, 20, 2)
+
+if st.button('Recommend Something - click!'):
+    st.write(similar_MonthlyIncome(monthlyincome, n_recs_c))
+
+
+#def similar_user_place(username, n):
+  u_id = le_user.transform([username])[0]
+  user_places_ids = trips[trips.username_id == u_id]['place_slug_id'].unique()
+  user_vector_trips = np.mean(matrix_places[user_places_ids], axis=0)
+  closest_for_user = cosine_distances(user_vector_trips.reshape(1,5), matrix_places)
+  sim_places = le_place.inverse_transform(np.argsort(closest_for_user[0])[:n])
+  return sim_places
+
+#one_user = st.selectbox('Select User', trips.username.unique())
+if one_user:
+    st.write(trips[trips.username == one_user]['place_slug'].unique())
+
+#n_recs_u = st.slider('How many recs? for user', 1, 20, 2)
+
+#if st.button('Recommend for a user - click!'):
+    similar_cities = similar_user_place(one_user, n_recs_u)
+    st.write(similar_cities)
+
