@@ -68,7 +68,10 @@ c = alt.Chart(vis_data).mark_circle(size = 60).encode(
 
 st.altair_chart(c, use_container_width=True)
 
+from PIL import Image
+image1 = Image.open('AttritionUMAP.png')
+image2 = Image.open('GenderUMAP.png')
 
-st.image(AttritionUMAP, caption="UMAP Cluster - Colored by Attrition", output_format="auto")
+st.image(image1, caption="UMAP Cluster - Colored by Attrition", output_format="auto")
 
-st.image(GenderUMAP, caption="UMAP Cluster - Colored by gender", output_format="auto")
+st.image(image2, caption="UMAP Cluster - Colored by gender", output_format="auto")
