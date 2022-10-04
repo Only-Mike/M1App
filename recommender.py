@@ -132,7 +132,7 @@ if st.button('Recommend Something - click!'):
     st.write(similar_MonthlyIncome(monthlyincome, n_recs_c))
 
 
-#def similar_user_place(username, n):
+def similar_user_place(username, n):
   u_id = le_Age.transform([Age])[0]
   Age_ids = hr_df[hr_df.Age == u_id]['MonthlyIncome'].unique()
   Age_vector_trips = np.mean(matrix_MonthlyIncome[MonthlyIncome_ids], axis=0)
@@ -140,13 +140,13 @@ if st.button('Recommend Something - click!'):
   sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(closest_for_user[0])[:n])
   return sim_places
 
-#one_user = st.selectbox('Select User', trips.username.unique())
+one_user = st.selectbox('Select User', trips.username.unique())
 if one_user:
     st.write(hr_df[hr_df.Age == one_user]['MonthlyIncome'].unique())
 
-#n_recs_u = st.slider('How many recs? for user', 1, 20, 2)
+n_recs_u = st.slider('How many recs? for user', 1, 20, 2)
 
-#if st.button('Recommend for a user - click!'):
+if st.button('Recommend for a user - click!'):
     similar_cities = similar_Age(one_user, n_recs_u)
     st.write(similar_MonthlyIncome)
 
