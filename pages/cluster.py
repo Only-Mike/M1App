@@ -64,6 +64,6 @@ vis_data['MonthlyIncome'] = hr_df['MonthlyIncome']
 vis_data.columns = ['x', 'y', 'Gender', 'MonthlyIncome']
 
 c = alt.Chart(vis_data).mark_circle(size = 60).encode(
-    x='x', y='y', tooltip=['Gender', 'MonthlyIncome', 'Education'])
+    x='x', y='y', tooltip=['Gender', 'MonthlyIncome'])
 
 st.altair_chart(c, use_container_width=True)
