@@ -6,20 +6,6 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics.pairwise import cosine_distances
 
-def main_page():
-    st.markdown("# Main page 🎈")
-    st.sidebar.markdown("# Main page 🎈")
-
-def page2():
-    st.markdown("# Cluster 2 ❄️")
-    st.sidebar.markdown("# Cluster 2 ❄️")
-
-
-page_names_to_funcs = {
-    "Main Page": main_page,
-    "Page 2": page2,
-}
-
 selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
 page_names_to_funcs[selected_page]()
 
