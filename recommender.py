@@ -50,12 +50,12 @@ def read_process_data():
 
 
     # distance-matrix
-    cosine_distance_matrix_matrix_Educations = cosine_distances(matrix_Educations)
+    cosine_distance_matrix_Educations = cosine_distances(matrix_Educations)
   
 
-    return hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalances, matrix_Educations, cosine_distance_matrix_matrix_Educations
+    return hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalances, matrix_Educations, cosine_distance_matrix_Educations
 
-hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalances, matrix_matrix_Educations, cosine_distance_matrix_Educations = read_process_data()
+hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalances, matrix_Educations, cosine_distance_matrix_Educations = read_process_data()
 
 
 def similar_Education(WorkLifeBalance, n):
@@ -78,10 +78,10 @@ if st.button('Recommend Something - click!'):
 
 
 def similar_WorkLifeBalance_Education(WorkLifeBalance, n):
-  u_id = le_Education.transform([WorkLifeBalance])[0]
+  u_id = le_WorkLifeBalance.transform([WorkLifeBalance])[0]
   Education_ids = hr_df[hr_df.WorkLifeBalanceID == u_id]['EducationID'].unique()
-  Education_vector_hr_df = np.mean(matrix_matrix_Educations[Education_ids], axis=0)
-  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_matrix_Educations)
+  Education_vector_hr_df = np.mean(matrix_Educations[Education_ids], axis=0)
+  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_Educations)
   sim_Educations = le_Education.inverse_transform(np.argsort(closest_for_user[0])[:n])
   return sim_Educations
 
