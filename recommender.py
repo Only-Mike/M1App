@@ -80,14 +80,14 @@ def similar_MonthlyIncome(MonthlyIncome, n):
 
 st.title('Streamlit Recommender')
     
-monthly_income = st.selectbox('Select Place', hr_df.MonthlyIncome.unique())
+monthly_income = st.selectbox('Select Monthly Income', hr_df.MonthlyIncome.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
     st.write(similar_MonthlyIncome(monthly_income, n_recs_c))
 
 
-def similar_user_place(username, n):
+def similar_Age(Age, n):
   u_id = le_Age.transform([Age])[0]
   Age_ids = hr_df[hr_df.Age == u_id]['MonthlyIncome'].unique()
   Age_vector_trips = np.mean(matrix_MonthlyIncome[MonthlyIncome_ids], axis=0)
@@ -101,7 +101,7 @@ if one_user:
 
 n_recs_u = st.slider('How many recs? for user', 1, 20, 2)
 
-if st.button('Recommend for a user - click!'):
+if st.button('Recommend for a Age - click!'):
     similar_cities = similar_Age(one_user, n_recs_u)
     st.write(similar_MonthlyIncome)
 
