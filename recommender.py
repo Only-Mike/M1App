@@ -46,7 +46,7 @@ def read_process_data():
     # decomposition
     svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
     matrix_WorkLifeBalances = svd.fit_transform(matrix)
-    matrix_Educations = svd.fit_transform(matrix)
+    matrix_Educations = svd.fit_transform(matrix.T)
 
 
     # distance-matrix
