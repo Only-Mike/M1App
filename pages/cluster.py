@@ -69,7 +69,8 @@ c = alt.Chart(vis_data).mark_circle(size = 60).encode(
 st.altair_chart(c, use_container_width=True)
 
 st.header('UMAP Graphs')
-st.subheader('Because of compat problems with UMAP, we have put in pictures instead. /n Code can be found in sourcefile on GitHub')
+st.subheader('Because of compat problems with UMAP, we have put in pictures instead.')
+st.subheader('Code can be found in sourcefile on github.')
 
 from PIL import Image
 image1 = Image.open('AttritionUMAP.png')
