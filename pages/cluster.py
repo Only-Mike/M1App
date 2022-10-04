@@ -66,11 +66,12 @@ vis_data.columns = ['x', 'y', 'Gender', 'MonthlyIncome']
 c = alt.Chart(vis_data).mark_circle(size = 60).encode(
     x='x', y='y', tooltip=['Gender', 'MonthlyIncome'])
 
-st.altair_chart(c, use_container_width=True)
+st.altair_chart(c, use_container_width=False)
 
 st.header('UMAP Graphs')
-st.subheader('Because of compat problems with UMAP, we have put in pictures instead.')
-st.subheader('Code can be found in sourcefile on github.')
+st.subheader('Because of compat problems with UMAP, we have put in pictures on streamlit instead.')
+st.text('On the x-axis we find the Gender values and on the y-axis we find the Monthly income ')
+st.text('The two graphs done by the UMAP model clearly shows clustering in regards to both Attrition and Gender.')
 
 from PIL import Image
 image1 = Image.open('AttritionUMAP.png')
@@ -79,3 +80,6 @@ image2 = Image.open('GenderUMAP.png')
 st.image(image1, caption="UMAP Cluster - Colored by Attrition", output_format="auto")
 
 st.image(image2, caption="UMAP Cluster - Colored by gender", output_format="auto")
+
+st.text('The two graphs done by the UMAP model clearly shows clustering in regards to both Attrition and Gender.')
+
