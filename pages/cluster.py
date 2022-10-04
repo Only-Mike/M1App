@@ -57,6 +57,4 @@ pca = PCA(n_components=2)
 data_reduced_pca = pca.fit_transform(hr_df_scaled)
 print(pca.explained_variance_ratio_)
 
-fig = plt.figure(figsize=(9,7))
 sns.scatterplot(data_reduced_pca[:,0],data_reduced_pca[:,1])
-st.pyplot(fig)
