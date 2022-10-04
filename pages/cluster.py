@@ -85,5 +85,5 @@ st.image(image2, caption="UMAP Cluster - Colored by gender", output_format="auto
 st.image(image3, caption="UMAP Cluster - Colored by Performance rating", output_format="auto")
 
 st.text('The two graphs done by the UMAP model clearly shows clustering in regards to both Attrition, Gender and PerformanceRating.')
-st.text('For some reason the PerformanceRating only show 3 and 4')
+st.text('For some reason the PerformanceRating only shows the employees given the performance rating 3 and 4')
 
