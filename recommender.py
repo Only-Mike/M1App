@@ -74,7 +74,7 @@ def similar_MonthlyIncome(MonthlyIncome, n):
   place: name of place (str)
   n: number of similar cities to print
   """
-  ix = le_MonthlyIncome.transform([MonthlyIncome])[0]
+  ix = le_MonthlyIncome.transform(MonthlyIncome)[0]
   sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(cosine_distance_matrix_MonthlyIncome[ix,:])[:n+1])
   return sim_MonthlyIncome[1:]
 
