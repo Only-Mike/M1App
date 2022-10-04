@@ -30,61 +30,60 @@ def read_process_data():
     hr_df.WorkLifeBalance = hr_df.WorkLifeBalance.fillna(3)
     hr_df.TotalWorkingYears = hr_df.TotalWorkingYears.fillna(11) 
 
-    hr_df.Department.replace(('Sales', 'Research & Development', 'Marketing'), (0, 1, 2), inplace=True)
 
     # encode ids
-    le_Department = LabelEncoder()
+    le_WorkLifeBalance = LabelEncoder()
     le_Education = LabelEncoder()
 
-    hr_df['Department'] = le_Department.fit_transform(hr_df['Department'])
+    hr_df['WorkLifeBalance'] = le_WorkLifeBalance.fit_transform(hr_df['WorkLifeBalance'])
     hr_df['Education'] = le_Education.fit_transform(hr_df['Education'])
 
 
     # construct matrix
     ones = np.ones(len(hr_df), np.uint32)
-    matrix = ss.coo_matrix((ones, (hr_df['Department'], hr_df['Education'])))
+    matrix = ss.coo_matrix((ones, (hr_df['WorkLifeBalance'], hr_df['Education'])))
 
     # decomposition
     svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
-    matrix_Department = svd.fit_transform(matrix)
+    matrix_WorkLifeBalance = svd.fit_transform(matrix)
     matrix_Education = svd.fit_transform(matrix)
 
 
     # distance-matrix
-    cosine_distance_matrix_Department = cosine_distances(matrix_Department)
+    cosine_distance_matrix_WorkLifeBalance = cosine_distances(matrix_WorkLifeBalance)
   
 
-    return hr_df, le_Department, le_Education, matrix, svd, matrix_Department, matrix_Education, cosine_distance_matrix_Department
+    return hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalance, matrix_Education, cosine_distance_matrix_WorkLifeBalance
 
-hr_df, le_Department, le_Education, matrix, svd, matrix_Department, matrix_Education, cosine_distance_matrix_Department = read_process_data()
+hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalance, matrix_Education, cosine_distance_matrix_WorkLifeBalance = read_process_data()
 
 
-def similar_Department(Department, n):
+def similar_WorkLifeBalance(WorkLifeBalance, n):
   """
-  this function performs Department similarity search
+  this function performs WorkLifeBalance similarity search
   place: name of place (str)
   n: number of similar cities to print
   """
-  ix = le_Department.transform(['Department'])[0]
-  sim_Department = le_Department.inverse_transform(np.argsort(cosine_distance_matrix_Department[ix,:])[:n+1])
-  return sim_Department[1:]
+  ix = le_WorkLifeBalance.transform(['WorkLifeBalance'])[0]
+  sim_WorkLifeBalance = le_WorkLifeBalance.inverse_transform(np.argsort(cosine_distance_matrix_WorkLifeBalance[ix,:])[:n+1])
+  return sim_WorkLifeBalance[1:]
 
 st.title('Streamlit Recommender')
     
-department = st.selectbox('Select Department', hr_df.Department.unique())
+WorkLifeBalance = st.selectbox('Select WorkLifeBalance', hr_df.WorkLifeBalance.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
-    st.write(similar_Department(department, n_recs_c))
+    st.write(similar_WorkLifeBalance(WorkLifeBalance, n_recs_c))
 
 
-def similar_Department_Education(Education, n):
+def similar_WorkLifeBalance_Education(Education, n):
   u_id = le_Education.transform([Education])[0]
-  Education_ids = hr_df[hr_df.Education == u_id]['Department'].unique()
-  Education_vector_hr_df = np.mean(matrix_Department[Education_ids], axis=0)
-  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_Department)
-  sim_Department = le_Department.inverse_transform(np.argsort(closest_for_user[0])[:n])
-  return sim_Department
+  Education_ids = hr_df[hr_df.Education == u_id]['WorkLifeBalance'].unique()
+  Education_vector_hr_df = np.mean(matrix_WorkLifeBalance[Education_ids], axis=0)
+  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_WorkLifeBalance)
+  sim_WorkLifeBalance = le_WorkLifeBalance.inverse_transform(np.argsort(closest_for_user[0])[:n])
+  return sim_WorkLifeBalance
 
 one_user = st.selectbox('Select Education', hr_df.Education.unique())
 if one_user:
@@ -93,6 +92,6 @@ if one_user:
 n_recs_u = st.slider('How many recs? for Education', 1, 20, 2)
 
 if st.button('Recommend Education - click!'):
-    similar_cities = similar_Department_Education(one_user, n_recs_u)
+    similar_cities = similar_WorkLifeBalance_Education(one_user, n_recs_u)
     st.write(similar_cities)
 
