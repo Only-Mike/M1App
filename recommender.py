@@ -30,6 +30,8 @@ def read_process_data():
     hr_df.WorkLifeBalance = hr_df.WorkLifeBalance.fillna(3)
     hr_df.TotalWorkingYears = hr_df.TotalWorkingYears.fillna(11) 
 
+    hr_df.Department.replace(('Sales', 'Research & Development', 'Marketing'), (0, 1, 2), inplace=True)
+
     # encode ids
     le_Department = LabelEncoder()
     le_EducationField = LabelEncoder()
