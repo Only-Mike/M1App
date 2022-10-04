@@ -57,10 +57,14 @@ pca = PCA(n_components=2)
 data_reduced_pca = pca.fit_transform(hr_df_scaled)
 print(pca.explained_variance_ratio_)
 
-import umap
-umap_scaler = umap.UMAP()
-embeddings = umap_scaler.fit_transform(hr_df_scaled)
+import altair as alt
+vis_data = pd.DataFrame(data_reduced_pca)
+vis_data['Gender'] = hr_df['Gender']
+vis_data['MonthlyIncome'] = hr_df['MonthlyIncome']
+vis_data.columns = ['x', 'y', 'Gender', 'MonthlyIncome']
 
-fig = plt.figure
-sns.scatterplot(embeddings[:,0], hue = hr_df['Attrition'])
-st.pyplot(fig, clear_figure=None)
+alt.Chart(vis_data).mark_circle(size=60).encode(
+    x='x',
+    y='y',
+    tooltip=['Gender', 'MonthlyIncome']
+).interactive()
