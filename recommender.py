@@ -44,7 +44,7 @@ def read_process_data():
     matrix = ss.coo_matrix((ones, (hr_df['WorkLifeBalanceID'], hr_df['EducationID'])))
 
     # decomposition
-    svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
+    svd = TruncatedSVD(n_components=4, n_iter=7, random_state=42)
     matrix_WorkLifeBalances = svd.fit_transform(matrix)
     matrix_Educations = svd.fit_transform(matrix.T)
 
