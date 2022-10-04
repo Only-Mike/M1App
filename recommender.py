@@ -95,7 +95,7 @@ def similar_user_place(username, n):
   sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(closest_for_user[0])[:n])
   return sim_places
 
-one_user = st.selectbox('Select User', trips.username.unique())
+one_user = st.selectbox('Select Age', hr_df.Age.unique())
 if one_user:
     st.write(hr_df[hr_df.Age == one_user]['MonthlyIncome'].unique())
 
