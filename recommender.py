@@ -10,7 +10,7 @@ st.set_page_config(page_title='Streamlit HR recommender', layout = 'wide')
 
 def read_process_data():
     # Import datasets
-    hr = pd.read_excel("data_dictionary.xlsx")
+    hr = pd.read_csv("data_dictionary.csv")
     hr1 = pd.read_csv("employee_survey_data.csv")
     hr2 = pd.read_csv("general_data.csv")
     hr3 = pd.read_csv("manager_survey_data.csv")
