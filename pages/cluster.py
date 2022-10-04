@@ -58,6 +58,7 @@ data_reduced_pca = pca.fit_transform(hr_df_scaled)
 print(pca.explained_variance_ratio_)
 
 import umap
+umap_scaler = umap.UMAP()
 embeddings = umap_scaler.fit_transform(hr_df_scaled)
 
 fig = plt.figure
