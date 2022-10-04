@@ -64,7 +64,7 @@ def similar_WorkLifeBalance(WorkLifeBalance, n):
   place: name of place (str)
   n: number of similar cities to print
   """
-  ix = le_WorkLifeBalance.transform(['WorkLifeBalance'])[0]
+  ix = le_Education.transform(['Education'])[0]
   sim_WorkLifeBalances = le_WorkLifeBalance.inverse_transform(np.argsort(cosine_distance_matrix_WorkLifeBalances[ix,:])[:n+1])
   return sim_WorkLifeBalances[1:]
 
