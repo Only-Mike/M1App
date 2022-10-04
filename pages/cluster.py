@@ -57,6 +57,10 @@ pca = PCA(n_components=2)
 data_reduced_pca = pca.fit_transform(hr_df_scaled)
 print(pca.explained_variance_ratio_)
 
+import umap
+umap_scaler = umap.UMAP()
+embeddings = umap_scaler.fit_transform(hr_df_scaled)
+
 fig = plt.figure
 sns.scatterplot(embeddings[:,0], hue = hr_df['Attrition'])
 st.pyplot(fig, clear_figure=None)
