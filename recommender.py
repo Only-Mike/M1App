@@ -31,58 +31,58 @@ def read_process_data():
     hr_df.TotalWorkingYears = hr_df.TotalWorkingYears.fillna(11) 
 
     # encode ids
-    le_MonthlyIncome = LabelEncoder()
+    le_Department = LabelEncoder()
     le_Age = LabelEncoder()
 
-    hr_df['MonthlyIncome'] = le_MonthlyIncome.fit_transform(hr_df['MonthlyIncome'])
+    hr_df['Department'] = le_Department.fit_transform(hr_df['Department'])
     hr_df['Age'] = le_Age.fit_transform(hr_df['Age'])
 
 
     # construct matrix
     ones = np.ones(len(hr_df), np.uint32)
-    matrix = ss.coo_matrix((ones, (hr_df['MonthlyIncome'], hr_df['Age'])))
+    matrix = ss.coo_matrix((ones, (hr_df['Department'], hr_df['Age'])))
 
     # decomposition
     svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
-    matrix_MonthlyIncome = svd.fit_transform(matrix)
+    matrix_Department = svd.fit_transform(matrix)
     matrix_Age = svd.fit_transform(matrix.T)
 
 
     # distance-matrix
-    cosine_distance_matrix_MonthlyIncome = cosine_distances(matrix_MonthlyIncome)
+    cosine_distance_matrix_Department = cosine_distances(matrix_Department)
   
 
-    return hr_df, le_MonthlyIncome, le_Age, matrix, svd, matrix_MonthlyIncome, matrix_Age, cosine_distance_matrix_MonthlyIncome
+    return hr_df, le_Department, le_Age, matrix, svd, matrix_Department, matrix_Age, cosine_distance_matrix_Department
 
-hr_df, le_MonthlyIncome, le_Age, matrix, svd, matrix_MonthlyIncome, matrix_Age, cosine_distance_matrix_MonthlyIncome = read_process_data()
+hr_df, le_Department, le_Age, matrix, svd, matrix_Department, matrix_Age, cosine_distance_matrix_Department = read_process_data()
 
 
-def similar_MonthlyIncome(MonthlyIncome, n):
+def similar_Department(Department, n):
   """
-  this function performs MOnthly Income similarity search
+  this function performs Department similarity search
   place: name of place (str)
   n: number of similar cities to print
   """
-  ix = le_MonthlyIncome.transform([MonthlyIncome])[0]
-  sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(cosine_distance_matrix_MonthlyIncome[ix,:])[:n+1])
-  return sim_MonthlyIncome[1:]
+  ix = le_Department.transform([Department])[0]
+  sim_Department = le_Department.inverse_transform(np.argsort(cosine_distance_matrix_Department[ix,:])[:n+1])
+  return sim_Department[1:]
 
 st.title('Streamlit Recommender')
     
-monthly_income = st.selectbox('Select Monthly Income', hr_df.MonthlyIncome.unique())
+department = st.selectbox('Select Department', hr_df.Department.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
-    st.write(similar_MonthlyIncome(monthly_income, n_recs_c))
+    st.write(similar_Department(department, n_recs_c))
 
 
-def similar_Monthly_Age(Age, n):
+def similar_Department_Age(Age, n):
   u_id = le_Age.transform([Age])[0]
-  Age_ids = hr_df[hr_df.Age == u_id]['MonthlyIncome'].unique()
-  Age_vector_hr_df = np.mean(matrix_MonthlyIncome[Age_ids], axis=0)
-  closest_for_user = cosine_distances(Age_vector_hr_df.reshape(1,5), matrix_MonthlyIncome)
-  sim_MonthlyIncome = le_MonthlyIncome.inverse_transform(np.argsort(closest_for_user[0])[:n])
-  return sim_MonthlyIncome
+  Age_ids = hr_df[hr_df.Age == u_id]['Department'].unique()
+  Age_vector_hr_df = np.mean(matrix_Department[Age_ids], axis=0)
+  closest_for_user = cosine_distances(Age_vector_hr_df.reshape(1,5), matrix_Department)
+  sim_Department = le_Department.inverse_transform(np.argsort(closest_for_user[0])[:n])
+  return sim_Department
 
 one_user = st.selectbox('Select Age', hr_df.Age.unique())
 if one_user:
