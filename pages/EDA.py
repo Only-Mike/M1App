@@ -37,11 +37,14 @@ hr1 = pd.read_csv("employee_survey_data.csv")
 hr2 = pd.read_csv("general_data.csv")
 hr3 = pd.read_csv("manager_survey_data.csv")'''
 
+st.code(code, language='python')
+
 st.text('Then we merge them with the pandas.merge function')
 code = '''
 mergehr = pd.merge(hr1, hr2)
 hr_df = pd.merge(mergehr, hr3)
 '''
+st.code(code, language='python')
 
 st.text('Then we fill out na within the dataset with the closest mean integer')
 
