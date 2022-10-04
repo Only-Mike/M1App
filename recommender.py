@@ -70,11 +70,11 @@ def similar_WorkLifeBalance(WorkLifeBalance, n):
 
 st.title('Streamlit Recommender')
     
-WorkLifeBalance = st.selectbox('Select Education', hr_df.Education.unique())
+One_WorkLifeBalance = st.selectbox('Select Education', hr_df.Education.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
-    st.write(similar_WorkLifeBalance(WorkLifeBalance, n_recs_c))
+    st.write(similar_WorkLifeBalance(One_WorkLifeBalance, n_recs_c))
 
 
 def similar_WorkLifeBalance_Education(WorkLifeBalance, n):
