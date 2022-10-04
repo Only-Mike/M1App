@@ -76,7 +76,7 @@ st.text('The two graphs done by the UMAP model clearly shows clustering in regar
 from PIL import Image
 image1 = Image.open('AttritionUMAP.png')
 image2 = Image.open('GenderUMAP.png')
-image3 = Image.open('PerformanceRatingUMAP.png')
+image3 = Image.open('PerformanceRating.png')
 
 st.image(image1, caption="UMAP Cluster - Colored by Attrition", output_format="auto")
 
