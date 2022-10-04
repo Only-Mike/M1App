@@ -58,32 +58,32 @@ def read_process_data():
 hr_df, le_WorkLifeBalance, le_Education, matrix, svd, matrix_WorkLifeBalances, matrix_matrix_Educations, cosine_distance_matrix_Educations = read_process_data()
 
 
-def similar_WorkLifeBalance(WorkLifeBalance, n):
+def similar_Education(WorkLifeBalance, n):
   """
   this function performs WorkLifeBalance similarity search
   place: name of place (str)
   n: number of similar cities to print
   """
   ix = le_Education.transform(['Education'])[0]
-  sim_WorkLifeBalances = le_WorkLifeBalance.inverse_transform(np.argsort(cosine_distance_matrix_WorkLifeBalances[ix,:])[:n+1])
+  sim_WorkLifeBalances = le_Education.inverse_transform(np.argsort(cosine_distance_matrix_Educations[ix,:])[:n+1])
   return sim_WorkLifeBalances[1:]
 
 st.title('Streamlit Recommender')
     
-One_WorkLifeBalance = st.selectbox('Select Education', hr_df.Education.unique())
+One_Education = st.selectbox('Select Education', hr_df.Education.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
-    st.write(similar_WorkLifeBalance(One_WorkLifeBalance, n_recs_c))
+    st.write(similar_Education(One_Education, n_recs_c))
 
 
 def similar_WorkLifeBalance_Education(WorkLifeBalance, n):
   u_id = le_Education.transform([WorkLifeBalance])[0]
-  Education_ids = hr_df[hr_df.EducationID == u_id]['WorkLifeBalanceID'].unique()
-  Education_vector_hr_df = np.mean(matrix_WorkLifeBalances[Education_ids], axis=0)
-  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_WorkLifeBalances)
-  sim_WorkLifeBalance = le_WorkLifeBalance.inverse_transform(np.argsort(closest_for_user[0])[:n])
-  return sim_WorkLifeBalance
+  Education_ids = hr_df[hr_df.WorkLifeBalanceID == u_id]['EducationID'].unique()
+  Education_vector_hr_df = np.mean(matrix_matrix_Educations[Education_ids], axis=0)
+  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_matrix_Educations)
+  sim_Educations = le_Education.inverse_transform(np.argsort(closest_for_user[0])[:n])
+  return sim_Educations
 
 one_user = st.selectbox('Select Education', hr_df.WorkLifeBalance.unique())
 if one_user:
