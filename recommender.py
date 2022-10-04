@@ -71,9 +71,8 @@ def similar_Education(WorkLifeBalance, n):
 st.title('Streamlit Recommender')
 st.subheader('NB: It seems like the encoder cant recognise the "Education" value for some reason')
 
-st.text('raise ValueError(f"y contains previously unseen labels: {str(e)}"))
+st.text('raise ValueError(contains previously unseen labels: {str(e)}"))
 
-ValueError: y contains previously unseen labels: 'Education'')
     
 One_Education = st.selectbox('Select Education', hr_df.Education.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
