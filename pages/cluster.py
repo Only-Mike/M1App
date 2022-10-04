@@ -67,3 +67,8 @@ c = alt.Chart(vis_data).mark_circle(size = 60).encode(
     x='x', y='y', tooltip=['Gender', 'MonthlyIncome'])
 
 st.altair_chart(c, use_container_width=True)
+
+
+st.image(AttritionUMAP, caption="UMAP Cluster - Colored by Attrition", output_format="auto")
+
+st.image(GenderUMAP, caption="UMAP Cluster - Colored by gender", output_format="auto")
