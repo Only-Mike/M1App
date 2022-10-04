@@ -35,13 +35,13 @@ def read_process_data():
     le_WorkLifeBalance = LabelEncoder()
     le_Education = LabelEncoder()
 
-    hr_df['WorkLifeBalance'] = le_WorkLifeBalance.fit_transform(hr_df['Work_Life_Balance'])
-    hr_df['Education'] = le_Education.fit_transform(hr_df['education1'])
+    hr_df['WorkLifeBalanceID'] = le_WorkLifeBalance.fit_transform(hr_df['WorkLifeBalance'])
+    hr_df['EducationID'] = le_Education.fit_transform(hr_df['Education'])
 
 
     # construct matrix
     ones = np.ones(len(hr_df), np.uint32)
-    matrix = ss.coo_matrix((ones, (hr_df['WorkLifeBalance'], hr_df['Education'])))
+    matrix = ss.coo_matrix((ones, (hr_df['WorkLifeBalanceID'], hr_df['EducationID'])))
 
     # decomposition
     svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
@@ -65,29 +65,29 @@ def similar_WorkLifeBalance(WorkLifeBalance, n):
   n: number of similar cities to print
   """
   ix = le_WorkLifeBalance.transform(['WorkLifeBalance'])[0]
-  sim_WorkLifeBalance = le_WorkLifeBalance.inverse_transform(np.argsort(cosine_distance_matrix_WorkLifeBalance[ix,:])[:n+1])
-  return sim_WorkLifeBalance[1:]
+  sim_WorkLifeBalances = le_WorkLifeBalance.inverse_transform(np.argsort(cosine_distance_matrix_WorkLifeBalances[ix,:])[:n+1])
+  return sim_WorkLifeBalances[1:]
 
 st.title('Streamlit Recommender')
     
-WorkLifeBalance = st.selectbox('Select education1', hr_df.education1.unique())
+WorkLifeBalance = st.selectbox('Select Education', hr_df.Education.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
     st.write(similar_WorkLifeBalance(WorkLifeBalance, n_recs_c))
 
 
-def similar_WorkLifeBalance_Education(Work_Life_Balance, n):
-  u_id = le_Education.transform([Work_Life_Balance])[0]
-  Education_ids = hr_df[hr_df.Education == u_id]['WorkLifeBalance'].unique()
-  Education_vector_hr_df = np.mean(matrix_WorkLifeBalance[Education_ids], axis=0)
-  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_WorkLifeBalance)
+def similar_WorkLifeBalance_Education(WorkLifeBalance, n):
+  u_id = le_Education.transform([WorkLifeBalance])[0]
+  Education_ids = hr_df[hr_df.EducationID == u_id]['WorkLifeBalanceID'].unique()
+  Education_vector_hr_df = np.mean(matrix_WorkLifeBalances[Education_ids], axis=0)
+  closest_for_user = cosine_distances(Education_vector_hr_df.reshape(1,5), matrix_WorkLifeBalances)
   sim_WorkLifeBalance = le_WorkLifeBalance.inverse_transform(np.argsort(closest_for_user[0])[:n])
   return sim_WorkLifeBalance
 
-one_user = st.selectbox('Select Education', hr_df.Work_Life_Balance.unique())
+one_user = st.selectbox('Select Education', hr_df.WorkLifeBalance.unique())
 if one_user:
-    st.write(hr_df[hr_df.Education == one_user]['education1'].unique())
+    st.write(hr_df[hr_df.Education == one_user]['WorkLifeBalance'].unique())
 
 n_recs_u = st.slider('How many recs? for Education', 1, 20, 2)
 
