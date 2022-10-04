@@ -80,11 +80,11 @@ def similar_MonthlyIncome(MonthlyIncome, n):
 
 st.title('Streamlit Recommender')
     
-monthlyincome = st.selectbox('Select Place', hr_df.MonthlyIncome.unique())
+monthly_income = st.selectbox('Select Place', hr_df.MonthlyIncome.unique())
 n_recs_c = st.slider('How many recs?', 1, 20, 2)
 
 if st.button('Recommend Something - click!'):
-    st.write(similar_MonthlyIncome(monthlyincome, n_recs_c))
+    st.write(similar_MonthlyIncome(monthly_income, n_recs_c))
 
 
 def similar_user_place(username, n):
