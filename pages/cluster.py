@@ -61,11 +61,12 @@ import altair as alt
 vis_data = pd.DataFrame(data_reduced_pca)
 vis_data['Attrition'] = hr_df['Attrition']
 vis_data['MonthlyIncome'] = hr_df['MonthlyIncome']
+vis_data['JobPerformance'] = hr_df['JobPerformance']
 vis_data.columns = ['x', 'y', 'Attrition', 'MonthlyIncome']
 
 st.header('PCA Graph')
 c = alt.Chart(vis_data).mark_circle(size = 60).encode(
-    x='x', y='y', color = 'x', tooltip=['Attrition', 'MonthlyIncome'])
+    x='x', y='y', color = 'JobPerformance', tooltip=['Attrition', 'MonthlyIncome'])
 
 st.altair_chart(c, use_container_width=False)
 
