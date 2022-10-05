@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import itertools
+import UMAP 
 
 #Set page layout/header
 st.set_page_config(page_title='Streamlit Cluster', layout = 'wide')
