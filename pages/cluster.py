@@ -67,15 +67,10 @@ st.altair_chart(c, use_container_width=False)
 
 st.header('UMAP Graphs')
 
+
 st.text('On the x-axis we find the Gender values and on the y-axis we find the Monthly income ')
 st.text('The two graphs done by the UMAP model clearly shows clustering in regards to both Attrition and Gender.')
 
-umap_scaler = umap.UMAP()
-embeddings = umap_scaler.fit_transform(hr_df_scaled)
-from matplotlib import rcParams
-
-rcParams['figure.figsize'] = 20,15
-sns.scatterplot(embeddings[:,0],embeddings[:,1], hue = hr_df['PerformanceRating'], sizes=(400, 400))
 
 from PIL import Image
 image1 = Image.open('AttritionUMAP.png')
