@@ -3,13 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle
 import itertools
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.decomposition import PCA
 
 #Set page layout/header
 st.set_page_config(page_title='Streamlit Cluster', layout = 'wide')
