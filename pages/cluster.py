@@ -86,3 +86,20 @@ st.image(image3, caption="UMAP Cluster - Colored by Performance rating", output_
 st.text('The two graphs done by the UMAP model clearly shows clustering in regards to both Attrition, Gender and PerformanceRating.')
 st.text('For some reason the PerformanceRating only shows the employees given the performance rating 3 and 4')
 
+#quick correlation check
+
+# Compute the correlation matrix
+corr = hr_df.corr()
+
+# Generate a mask for the upper triangle
+mask = np.triu(np.ones_like(corr, dtype=bool))
+
+# Set up the matplotlib figure
+f, ax = plt.subplots(figsize=(11, 9))
+
+# Generate a custom diverging colormap
+cmap = sns.diverging_palette(230, 20, as_cmap=True)
+
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
