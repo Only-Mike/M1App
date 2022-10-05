@@ -1,0 +1,10 @@
+GITHUB REPO
+https://github.com/Only-Mike/M1App.git
+https://github.com/Only-Mike/M1App
+
+STREAMLIT DEPLOYED APP
+https://only-mike-m1app-recommender-4hlrmm.streamlitapp.com/
+
+COLAB LINKS
+https://colab.research.google.com/drive/1Brj3xZzGdzikYga7a8P0wQbp83BawC_c?usp=sharing   <----- UML 
+https://colab.research.google.com/drive/1K2keo0NcWgT6l-v86cJpBbKCamQMQeFU?usp=sharing   <----- EDA & SML
