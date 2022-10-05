@@ -65,7 +65,7 @@ vis_data.columns = ['x', 'y', 'Attrition', 'MonthlyIncome']
 
 st.header('PCA Graph')
 c = alt.Chart(vis_data).mark_circle(size = 60).encode(
-    x='x', y='y', color = 'Gender', tooltip=['Attrition', 'MonthlyIncome'])
+    x='x', y='y', color = 'x', tooltip=['Attrition', 'MonthlyIncome'])
 
 st.altair_chart(c, use_container_width=False)
 
